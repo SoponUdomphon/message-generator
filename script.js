@@ -2,7 +2,7 @@
 
 
 /* ----- Sentence Structure ---- 
-`In the spirit of ${scientist}, let's ${Verb} ${Adverb} 
+`In the spirit of ${Scientist}, let's ${Verb} ${Adverb} 
 with a ${Adjective} approach. Embrace the ${Noun} and work 
 towards unlocking the ${Object}!` */
 
@@ -133,3 +133,50 @@ const nouns = [
       "Halting Problem Fortune Decision Dice",
     ],
   };
+
+  /* --------- Programming Part ---------- */
+
+  // Random Function
+  const makeRandom = (num) => {
+    let random = Math.floor(Math.random() * num);
+    return random;
+    // console.log(random);
+  }
+
+  // Random in Array
+  const randomArray = () => {
+    sci = makeRandom(scientists.length);
+    noun = makeRandom(nouns.length);
+    adv = makeRandom(adverbs.length);
+    verb = makeRandom(verbs.length);
+    adj = makeRandom(adjectives.length);
+    obj = makeRandom(objects.length);
+
+    return sci, noun, adv, verb, adj, obj;
+  }
+
+  randomArray();
+
+  // Random Artifact
+  const randomArtifact = () => {
+    let artArray = artifacts[`${scientists[sci]}`];
+    let randomArt = makeRandom(artArray.length);
+    
+    return print_artifact = artArray[randomArt]; 
+  }
+  
+  randomArtifact();
+
+  // Make Message
+  console.log(
+`
+
+---------------------------- Message ----------------------------------
+In the spirit of "${scientists[sci]}", let's ${verbs[verb]} ${adverbs[adv]} 
+with a ${adjectives[adj]} approach. Embrace the ${nouns[noun]} and work 
+towards unlocking the ${objects[obj]}!
+------------------------------------------------------------------------
+----------------------------- Artifact ---------------------------------
+${print_artifact}
+
+`);
