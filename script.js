@@ -145,38 +145,44 @@ const nouns = [
 
   // Random in Array
   const randomArray = () => {
-    sci = makeRandom(scientists.length);
-    noun = makeRandom(nouns.length);
-    adv = makeRandom(adverbs.length);
-    verb = makeRandom(verbs.length);
-    adj = makeRandom(adjectives.length);
-    obj = makeRandom(objects.length);
+    const sci = makeRandom(scientists.length); // assign variable declaration. 
+    const noun = makeRandom(nouns.length);
+    const adv = makeRandom(adverbs.length);
+    const verb = makeRandom(verbs.length);
+    const adj = makeRandom(adjectives.length);
+    const obj = makeRandom(objects.length);
 
-    return sci, noun, adv, verb, adj, obj;
+    return [sci, noun, adv, verb, adj, obj]; // replace x, x, x; ==> [x, x, x];
   }
 
-  randomArray();
+  // randomArray(); // unused function calls
 
   // Random Artifact
-  const randomArtifact = () => {
-    let artArray = artifacts[`${scientists[sci]}`];
+  const randomArtifact = (scientist) => { // assign parameter for access function furthur. 
+    let artArray = artifacts[scientist]; // `${scientists[sci]} can make to be declared as variable furthur.
     let randomArt = makeRandom(artArray.length);
     
-    return print_artifact = artArray[randomArt]; 
+    return artArray[randomArt]; 
   }
   
-  randomArtifact();
+  // randomArtifact(); // unused function calls
 
-  // Make Message
-  console.log(
-`
+  // Generate Message
+  const generateMessage = () => {
+    const [sci, noun, adv, verb, adj, obj] = randomArray();
+    const scientist = scientists[sci];
+    const artifact = randomArtifact(scientist);
+  
+    const message = `---------------------------- Message ----------------------------------
+    In the spirit of "${scientists[sci]}", let's ${verbs[verb]} ${adverbs[adv]} 
+    with a ${adjectives[adj]} approach. Embrace the ${nouns[noun]} and work 
+    towards unlocking the ${objects[obj]}!
+    ------------------------------------------------------------------------
+    ----------------------------- Artifact ---------------------------------
+    ${artifact}`
+  
+    console.log(message);
+  }
 
----------------------------- Message ----------------------------------
-In the spirit of "${scientists[sci]}", let's ${verbs[verb]} ${adverbs[adv]} 
-with a ${adjectives[adj]} approach. Embrace the ${nouns[noun]} and work 
-towards unlocking the ${objects[obj]}!
-------------------------------------------------------------------------
------------------------------ Artifact ---------------------------------
-${print_artifact}
-
-`);
+  // Call the function to generate and display the message
+  generateMessage();
