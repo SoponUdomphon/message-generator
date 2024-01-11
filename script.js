@@ -136,52 +136,67 @@ const nouns = [
 
   /* --------- Programming Part ---------- */
 
-  // Random Function
-  const makeRandom = (num) => {
-    let random = Math.floor(Math.random() * num);
-    return random;
-    // console.log(random);
+  // Function to generate a random integer up to a given limit
+  const getRandomIndex = (array) => { // for assign parameter with array
+    return Math.floor(Math.random() * array.length); // can be access to find the array length within operation
   }
 
-  // Random in Array
-  const randomArray = () => {
-    const sci = makeRandom(scientists.length); // assign variable declaration. 
-    const noun = makeRandom(nouns.length);
-    const adv = makeRandom(adverbs.length);
-    const verb = makeRandom(verbs.length);
-    const adj = makeRandom(adjectives.length);
-    const obj = makeRandom(objects.length);
+  // Function to get a random set of indices for arrays
+  const getRandomIndices = () => {
+    const sciIndex = getRandomIndex(scientists); 
+    const nounIndex = getRandomIndex(nouns);
+    const advIndex = getRandomIndex(adverbs);
+    const verbIndex = getRandomIndex(verbs);
+    const adjIndex = getRandomIndex(adjectives);
+    const objIndex = getRandomIndex(objects);
 
-    return [sci, noun, adv, verb, adj, obj]; // replace x, x, x; ==> [x, x, x];
+    // Return an array of random indices
+    return [sciIndex, nounIndex, advIndex, verbIndex, adjIndex, objIndex]; 
   }
 
-  // randomArray(); // unused function calls
-
-  // Random Artifact
-  const randomArtifact = (scientist) => { // assign parameter for access function furthur. 
-    let artArray = artifacts[scientist]; // `${scientists[sci]} can make to be declared as variable furthur.
-    let randomArt = makeRandom(artArray.length);
+  // Function to retrieve a random artifact for a given scientist
+  const getRandomArtifact = (scientist) => { 
+    let scitistArtifacts = artifacts[scientist]; 
+    let randomArtifactIndex = getRandomIndex(scitistArtifacts);
     
-    return artArray[randomArt]; 
+    // Return a random artifact for the given scientist
+    return scitistArtifacts[randomArtifactIndex]; 
   }
-  
-  // randomArtifact(); // unused function calls
 
-  // Generate Message
+  // Function to generate and display a message
   const generateMessage = () => {
-    const [sci, noun, adv, verb, adj, obj] = randomArray();
-    const scientist = scientists[sci];
-    const artifact = randomArtifact(scientist);
+    // Get a set of random indices
+    const [sciIndex, nounIndex, advIndex, verbIndex, adjIndex, objIndex] = getRandomIndices();
+
+    // Get the corresponding scientist and artifact
+    const scientist = scientists[sciIndex];
+    const artifact = getRandomArtifact(scientist);
   
-    const message = `---------------------------- Message ----------------------------------
-    In the spirit of "${scientists[sci]}", let's ${verbs[verb]} ${adverbs[adv]} 
-    with a ${adjectives[adj]} approach. Embrace the ${nouns[noun]} and work 
-    towards unlocking the ${objects[obj]}!
-    ------------------------------------------------------------------------
-    ----------------------------- Artifact ---------------------------------
-    ${artifact}`
-  
-    console.log(message);
+    // Construct and Display the message and ACSII art
+    console.log("  +---------------------------------------------------------------+")
+    console.log("|      _____  _                            ______  _               |")
+    console.log("|     |  _  || |                           |  _  \\(_)              |")
+    console.log("|     | | | || |_  _   _  _ __ ___  ______ | | | | _   ___  ___    |")
+    console.log("|     | | | || __|| | | || '_ ` _ \\|______|| | | || | / __|/ _ \\   |")
+    console.log("|     \\ \\/' /| |_ | |_| || | | | | |       | |/ / | || (__ | __/   |")
+    console.log("|      \\_/\\_\\ \\__| \\__,_||_| |_| |_|       |___/  |_| \\___|\\___|   |")
+    console.log("|                                                                  |")
+    console.log("|                                                                  |")
+    console.log(`|    In the spirit of "${scientists[sciIndex]}", let's ${verbs[verbIndex]} ${adverbs[advIndex]} with a `)
+    console.log(`|    ${adjectives[adjIndex]} approach. Embrace the ${nouns[nounIndex]} and work      `)
+    console.log(`|    towards unlocking the ${objects[objIndex]}!                            `)
+    console.log("|                                                                ")
+    console.log("|                                                                 ")
+    console.log("|                       Artifact for Today!                      ")
+    console.log(`|               (${artifact})             `)
+    console.log("|                                                                  |")
+    console.log("|                         +------+                                 |")
+    console.log("|                         |      |                                 |")
+    console.log("|                         |  /\\_/|                                 |")
+    console.log("|                         | ( o.o )                                |")
+    console.log("|                         |  > ^ <                                 |")
+    console.log("|                         +------+                                 |")
+    console.log("  +---------------------------------------------------------------+`")
   }
 
   // Call the function to generate and display the message
